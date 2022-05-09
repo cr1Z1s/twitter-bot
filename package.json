@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ca3zar/crypto-tweets/issues"
   },
-  "homepage": "https://github.com/ca3zar/crypto-tweets#readme"
+  "homepage": "https://github.com/ca3zar/crypto-tweets#readme",
+  "dependencies": {
+    "twit": "^2.2.11"
+  }
 }

@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/ca3zar/crypto-tweets#readme",
   "dependencies": {
+    "dotenv": "^16.0.1",
+    "pg": "^8.7.3",
     "twit": "^2.2.11"
   }
 }

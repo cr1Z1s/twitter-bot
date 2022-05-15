@@ -1,18 +1,25 @@
 require("dotenv").config();
-var Twit = require('twit');
 const pool = require("./db");
 const twit = require("./twit")
 
-// var T = new Twit({
-//   consumer_key: process.env.TWITTER_API_KEY,
-//   consumer_secret: process.env.TWITTER_API_KEY_SECRET,
-//   access_token: process.env.TWITTER_ACCESS_TOKEN,
-//   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
-//   timeout_ms: 60 * 1000,  // optional HTTP request timeout to apply to all requests.
-//   strictSSL: true,     // optional - requires SSL certificates to be valid.
-// });
+const keyword = "Bitcoin"
 
-twit.get('search/tweets', { q: 'algeria since:2011-07-11', count: 5 }, function (err, data, response) {
-  console.log(data);
+twit.get('search/tweets', { q: `${keyword} since:2011-07-11`, count: 20 }, async function (err, data, response) {
+  try {
+    //check if any of the tweets already exists
+
+    const tweets = data.statuses;
+    for (let i = 0; i < tweets.length; i++) {
+      const tweet = tweets[i];
+      const { id, created_at, user, text } = tweet;
+      const screen_name = user.screen_name;
+
+      //insert the tweets in the database
+      const newTweet = await pool.query("INSERT INTO tweets (tweet_id, screen_name, date_created, tweet_text) VALUES($1, $2, $3, $4)", [id, screen_name, created_at, text]);
+    }
+
+  } catch (error) {
+    console.error(error);
+  }
 })
 

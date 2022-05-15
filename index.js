@@ -1,7 +1,6 @@
 require("dotenv").config();
-// const twit = require("./twit.js");
-
 var Twit = require('twit');
+const pool = require("./db");
 
 var T = new Twit({
   consumer_key: process.env.TWITTER_API_KEY,
@@ -12,8 +11,7 @@ var T = new Twit({
   strictSSL: true,     // optional - requires SSL certificates to be valid.
 });
 
-T.get('search/tweets', { q: 'algeria since:2011-07-11', count: 1 }, function (err, data, response) {
-  console.log(data)
+T.get('search/tweets', { q: 'algeria since:2011-07-11', count: 5 }, function (err, data, response) {
+  console.log(data);
 })
 
-console.log("app running");

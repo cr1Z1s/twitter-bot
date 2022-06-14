@@ -23,7 +23,7 @@ twit.get('search/tweets', { q: `${keyword} since:2011-07-11`, count: 20 }, async
             console.log("this tweet exists already!")
           }
         } else {
-          console.log(err.message)
+          console.log(err.message);
         }
       });
     }
